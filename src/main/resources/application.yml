@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:15433/waiting_machine
+    username: user
+    password: pass
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: none

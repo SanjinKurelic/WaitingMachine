@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "f5cba6f1-078a-4d46-a704-8dc73343bdc4",
+		"name": "WaitingMachine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1865253"
+	},
+	"item": [
+		{
+			"name": "AddToQueue",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ticketNumber\": {{ticketNumber}},\r\n    \"status\": \"WAITING\",\r\n    \"arrivalTime\": \"{{today}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/queue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetQueue",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/queue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"queue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetReport",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/report",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"report"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const moment = require('moment');",
+					"pm.globals.set(\"today\", moment().format(\"YYYY-MM-DDTHH:mm:ss.ss\"));",
+					"pm.globals.set(\"ticketNumber\", Math.floor(Math.random() * 1000));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

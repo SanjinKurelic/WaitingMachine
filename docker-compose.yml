@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:12-alpine
+    ports:
+      - "15433:5432"
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=waiting_machine
+    volumes:
+      - ./docker-files/database/:/docker-entrypoint-initdb.d/
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./docker-files/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "19090:9090"
+
+  grafana:
+    build: "./docker-files/grafana"
+    ports:
+      - "13000:3000"
